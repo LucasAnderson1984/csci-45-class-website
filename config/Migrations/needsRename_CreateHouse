@@ -1,12 +1,12 @@
 <?php
 use Migrations\AbstractMigration;
-class CreateUsers extends AbstractMigration
+class CreateHouse extends AbstractMigration
 {
     public $autoId = false;
     public function change()
     {
         $table = $this->table(
-                   'users',
+                   'houses',
                    [
                      'id' => false,
                      'primary_key' => ['id']
