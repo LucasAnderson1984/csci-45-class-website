@@ -22,8 +22,16 @@ class CreateUsers extends AbstractMigration
           ->addColumn('email', 'string')
           ->addColumn('password', 'string')
           ->addColumn('is_active', 'boolean', ['default' => true])
-          ->addColumn('created_at', 'datetime')
-          ->addColumn('updated_at', 'datetime')
+          ->addColumn(
+            'created_at',
+            'datetime',
+            ['default' => 'CURRENT_TIMESTAMP']
+          )
+          ->addColumn(
+            'updated_at',
+            'datetime',
+            ['default' => 'CURRENT_TIMESTAMP']
+          )
           ->addIndex(
             'username',
             [

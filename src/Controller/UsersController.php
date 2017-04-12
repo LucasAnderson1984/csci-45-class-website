@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Controller\AppController;
+use Cake\Utility\Security;
 
 class UsersController extends AppController {
   public function index() {
@@ -23,6 +24,8 @@ class UsersController extends AppController {
     if ($this->request->is('post')) {
         $user = $this
                   ->Users->patchEntity($user, $this->request->getData());
+        $user['password'] = Security::hash($user['password'], 'md5', true);
+
         if ($this->Users->save($user)) {
             $this->Flash->success(__('The user has been saved.'));
 
@@ -42,6 +45,8 @@ class UsersController extends AppController {
 
     if ($this->request->is(['patch', 'post', 'put'])) {
         $user = $this->Users->patchEntity($user, $this->request->getData());
+        $user['password'] = Security::hash($user['password'], 'md5', true);
+
         if ($this->Users->save($user)) {
             $this->Flash->success(__('The user has been saved.'));
 

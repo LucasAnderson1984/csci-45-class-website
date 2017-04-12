@@ -13,7 +13,8 @@ class UsersTable extends Table {
     $this
       ->setTable('users')
       ->setDisplayField('id')
-      ->setPrimaryKey('id');
+      ->setPrimaryKey('id')
+      ->addBehavior('Timestamp');
   }
 
   public function validationDefault(Validator $validator) {
