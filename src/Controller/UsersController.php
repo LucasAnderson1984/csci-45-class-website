@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Utility\Security;
+use App\Form\CreateUserForm;
 
 class UsersController extends AppController {
   public function index() {
@@ -19,25 +20,32 @@ class UsersController extends AppController {
   }
 
   public function add() {
-    $user = $this->Users->newEntity();
+    // $user = $this->Users->newEntity();
+    $form = new CreateUserForm();
 
     if ($this->request->is('post')) {
-        $user = $this
-                  ->Users->patchEntity($user, $this->request->getData());
-        $user['password'] = Security::hash($user['password'], 'md5', true);
+      $isValid = $form->validate($this->request->getData());
 
-        if ($this->Users->save($user)) {
-            $this->Flash->success(__('The user has been saved.'));
-
-            return $this->redirect(['action' => 'index']);
-        }
-        $this
-          ->Flash
-            ->error(__('The user could not be saved. Please, try again.'));
+      if ($isValid) {
+        return $this->redirect(['action' => 'index']);
+      }
+        // $user = $this
+        //           ->Users->patchEntity($user, $this->request->getData());
+        // $user['password'] = Security::hash($user['password'], 'md5', true);
+        //
+        // if ($this->Users->save($user)) {
+        //     $this->Flash->success(__('The user has been saved.'));
+        //
+        //     return $this->redirect(['action' => 'index']);
+        // }
+        // $this
+        //   ->Flash
+        //     ->error(__('The user could not be saved. Please, try again.'));
     }
 
-    $this->set(compact('user'));
-    $this->set('_serialize', ['user']);
+    // $this->set(compact('user'));
+    $this->set('form', $form);
+    // $this->set('_serialize', ['user']);
   }
 
   public function edit($id = null) {

@@ -7,14 +7,14 @@
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($form) ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
             echo $this->Form->control('username');
             echo $this->Form->control('email');
             echo $this->Form->control('password');
-            echo $this->Form->control('is_active');
+            echo $this->Form->control('confirm_password');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -1,20 +1,19 @@
 <?php
-namespace App\Test\TestCase\View\Helper;
+namespace App\Test\TestCase\Form;
 
-use App\View\Helper\CreateUserHelper;
+use App\Form\CreateUserForm;
 use Cake\TestSuite\TestCase;
-use Cake\View\View;
 
 /**
- * App\View\Helper\CreateUserHelper Test Case
+ * App\Form\CreateUserForm Test Case
  */
-class CreateUserHelperTest extends TestCase
+class CreateUserFormTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\View\Helper\CreateUserHelper
+     * @var \App\Form\CreateUserForm
      */
     public $CreateUser;
 
@@ -26,8 +25,7 @@ class CreateUserHelperTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $view = new View();
-        $this->CreateUser = new CreateUserHelper($view);
+        $this->CreateUser = new CreateUserForm();
     }
 
     /**
