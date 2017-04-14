@@ -4,6 +4,8 @@ namespace App\Form;
 use Cake\Form\Form;
 use Cake\Form\Schema;
 use Cake\Validation\Validator;
+use Cake\Utility\Security;
+use Cake\ORM\TableRegistry;
 
 class CreateUserForm extends Form {
   protected function _buildSchema(Schema $schema) {
@@ -26,10 +28,10 @@ class CreateUserForm extends Form {
     $validator
       ->add('email', 'valid', ['rule' => 'email'])
       ->add(
-        'password',
-        'compareWith',
+        'confirm_password',
+        'compare',
         [
-          'rule' => ['compareWith', 'confirm_password'],
+          'rule' => ['compareWith', 'password'],
           'message'=>'The passwords does not match!'
         ]
       );
@@ -38,6 +40,12 @@ class CreateUserForm extends Form {
   }
 
   protected function _execute(array $data) {
-    return true;
+    unset($data['confirm_password']);
+    $data['password'] = Security::hash($data['password'], 'md5', true);
+
+    $users = TableRegistry::get('Users');
+    $user = $users->newEntity($data);
+
+    return $users->save($user);
   }
 }

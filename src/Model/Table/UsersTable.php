@@ -42,9 +42,7 @@ class UsersTable extends Table {
         ->notEmpty('password');
 
       $validator
-        ->boolean('is_active')
-        ->requirePresence('is_active', 'create')
-        ->notEmpty('is_active');
+        ->boolean('is_active');
 
       return $validator;
   }
