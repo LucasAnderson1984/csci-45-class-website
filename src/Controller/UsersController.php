@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Controller\AppController;
 use App\Form\CreateUserForm;
+use App\Form\UpdateUserForm;
 
 class UsersController extends AppController {
   public function index() {
@@ -28,7 +29,7 @@ class UsersController extends AppController {
         if ($form->execute($data)) {
           $this->Flash->success(__('The user has been saved.'));
 
-          return $this->redirect(['action' => 'index']);
+          return $this->redirect(['action' => 'view']);
         } else {
           $this
             ->Flash
@@ -42,22 +43,29 @@ class UsersController extends AppController {
 
   public function edit($id = null) {
     $user = $this->Users->get($id, ['contain' => []]);
+    $form = new UpdateUserForm();
 
     if ($this->request->is(['patch', 'post', 'put'])) {
-        $user = $this->Users->patchEntity($user, $this->request->getData());
-        $user['password'] = Security::hash($user['password'], 'md5', true);
+      $data = $this->request->getData();
 
-        if ($this->Users->save($user)) {
-            $this->Flash->success(__('The user has been saved.'));
+      if ($form->validate($data)) {
+        $data['id'] = $user->id;
+        $data['updated_at'] = time();
 
-            return $this->redirect(['action' => 'index']);
+        if ($form->execute($data)) {
+          $this->Flash->success(__('The user has been upated.'));
+
+          return $this->redirect(['action' => 'view', $user->id]);
+        } else {
+          $this
+            ->Flash
+              ->error(__('The user could not be updated. Please, try again.'));
         }
-        $this
-          ->Flash
-            ->error(__('The user could not be saved. Please, try again.'));
+      }
     }
 
     $this->set(compact('user'));
     $this->set('_serialize', ['user']);
+    $this->set('form', $form);
   }
 }

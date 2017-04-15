@@ -4,6 +4,7 @@ namespace App\Form;
 use Cake\Form\Form;
 use Cake\Form\Schema;
 use Cake\Validation\Validator;
+use Cake\ORM\TableRegistry;
 
 class UpdateUserForm extends Form
 {
@@ -28,6 +29,10 @@ class UpdateUserForm extends Form
   }
 
   protected function _execute(array $data) {
-    return true;
+    $users = TableRegistry::get('Users');
+    $user = $users->get($data['id']);
+    $user = $users->patchEntity($user, $data);
+
+    return $users->save($user);
   }
 }

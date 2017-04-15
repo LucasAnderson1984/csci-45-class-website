@@ -9,38 +9,21 @@
   <table cellpadding="0" cellspacing="0">
     <thead>
       <tr>
-        <th scope="col"><?= $this->Paginator->sort('id') ?></th>
         <th scope="col"><?= $this->Paginator->sort('username') ?></th>
         <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('is_active') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-        <th scope="col"><?= $this->Paginator->sort('updated_at') ?></th>
+        <th scope="col"><?= $this->Paginator->sort('Active') ?></th>
         <th scope="col" class="actions"><?= __('Actions') ?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($users as $user): ?>
       <tr>
-        <td><?= h($user->id) ?></td>
         <td><?= h($user->username) ?></td>
         <td><?= h($user->email) ?></td>
-        <td><?= h($user->password) ?></td>
-        <td><?= h($user->is_active) ?></td>
-        <td><?= h($user->created_at) ?></td>
-        <td><?= h($user->updated_at) ?></td>
+        <td><?= h($user->is_active ? 'True' : 'False') ?></td>
         <td class="actions">
-          <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+          <?= $this->Html->link(__('Show'), ['action' => 'view', $user->id]) ?>
           <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-          <?= $this
-                ->Form
-                  ->postLink(
-                    __('Delete'),
-                    ['action' => 'delete', $user->id],
-                    ['confirm' => __('Are you sure you want to delete # {0}?',
-                    $user->id)]
-                  )
-          ?>
         </td>
       </tr>
       <?php endforeach; ?>
