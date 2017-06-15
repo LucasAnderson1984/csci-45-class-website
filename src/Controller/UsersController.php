@@ -50,7 +50,7 @@ class UsersController extends AppController {
       $data = $this->request->getData();
 
       if ($form->validate($data)) {
-        $data['id'] = $user->uuid;
+        $data['uuid'] = $user->uuid;
         $data['updated_at'] = time();
 
         if ($form->execute($data)) {

@@ -25,7 +25,7 @@ class UsersFixture extends TestFixture
         'created_at' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'updated_at' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['uuid'], 'length' => []],
             'UNIQUE_USERNAME' => ['type' => 'unique', 'columns' => ['username'], 'length' => []],
             'UNIQUE_EMAIL' => ['type' => 'unique', 'columns' => ['email'], 'length' => []],
         ],

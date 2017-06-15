@@ -4,10 +4,10 @@
       <li>
         <?= $this->Form->postLink(
               __('Delete'),
-              ['action' => 'delete', $user->id],
+              ['action' => 'delete', $user->uuid],
               [
                 'confirm' => __('Are you sure you want to delete # {0}?',
-                                $user->id)
+                                $user->uuid)
               ]
         ) ?>
       </li>
