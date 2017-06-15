@@ -30,7 +30,7 @@ class UpdateUserForm extends Form
 
   protected function _execute(array $data) {
     $users = TableRegistry::get('Users');
-    $user = $users->get($data['id']);
+    $user = $users->get($data['uuid']);
     $user = $users->patchEntity($user, $data);
 
     return $users->save($user);
