@@ -7,7 +7,7 @@ class User extends Entity
 {
     protected $_accessible = [
         '*' => true,
-        'id' => false
+        'uuid' => false
     ];
 
     protected $_hidden = [

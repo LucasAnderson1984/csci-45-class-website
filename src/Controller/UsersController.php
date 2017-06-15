@@ -12,8 +12,8 @@ class UsersController extends AppController {
     $this->set('_serialize', ['users']);
   }
 
-  public function view($id = null) {
-    $user = $this->Users->get($id, ['contain' => []]);
+  public function view($uuid = null) {
+    $user = $this->Users->get($uuid, ['contain' => []]);
 
     $this->set('user', $user);
     $this->set('_serialize', ['user']);
@@ -26,10 +26,11 @@ class UsersController extends AppController {
       $data = $this->request->getData();
 
       if ($form->validate($data)) {
-        if ($form->execute($data)) {
+        $result = $form->execute($data);
+        if ($result) {
           $this->Flash->success(__('The user has been saved.'));
 
-          return $this->redirect(['action' => 'view']);
+          return $this->redirect(['action' => 'view', $result->uuid]);
         } else {
           $this
             ->Flash
@@ -41,21 +42,21 @@ class UsersController extends AppController {
     $this->set('form', $form);
   }
 
-  public function edit($id = null) {
-    $user = $this->Users->get($id, ['contain' => []]);
+  public function edit($uuid = null) {
+    $user = $this->Users->get($uuid, ['contain' => []]);
     $form = new UpdateUserForm();
 
     if ($this->request->is(['patch', 'post', 'put'])) {
       $data = $this->request->getData();
 
       if ($form->validate($data)) {
-        $data['id'] = $user->id;
+        $data['id'] = $user->uuid;
         $data['updated_at'] = time();
 
         if ($form->execute($data)) {
           $this->Flash->success(__('The user has been upated.'));
 
-          return $this->redirect(['action' => 'view', $user->id]);
+          return $this->redirect(['action' => 'view', $user->uuid]);
         } else {
           $this
             ->Flash

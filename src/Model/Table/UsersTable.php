@@ -12,8 +12,8 @@ class UsersTable extends Table {
 
     $this
       ->setTable('users')
-      ->setDisplayField('id')
-      ->setPrimaryKey('id')
+      ->setDisplayField('uuid')
+      ->setPrimaryKey('uuid')
       ->addBehavior('Timestamp');
   }
 

@@ -12,12 +12,12 @@ class CreateUsers extends AbstractMigration
                    'users',
                    [
                      'id' => false,
-                     'primary_key' => ['id']
+                     'primary_key' => ['uuid']
                    ]
                  );
 
         $table
-          ->addColumn('id', 'uuid')
+          ->addColumn('uuid', 'uuid', ['default' => 'UUID()'])
           ->addColumn('username', 'string')
           ->addColumn('email', 'string')
           ->addColumn('password', 'string')
@@ -40,7 +40,6 @@ class CreateUsers extends AbstractMigration
             ]
           )
           ->addIndex('email', ['name' => 'UNIQUE_EMAIL', 'unique' => true])
-          ->addPrimaryKey('id')
           ->create();
     }
 }

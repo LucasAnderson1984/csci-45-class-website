@@ -22,8 +22,8 @@
         <td><?= h($user->email) ?></td>
         <td><?= h($user->is_active ? 'True' : 'False') ?></td>
         <td class="actions">
-          <?= $this->Html->link(__('Show'), ['action' => 'view', $user->id]) ?>
-          <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+          <?= $this->Html->link(__('Show'), ['action' => 'view', $user->uuid]) ?>
+          <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->uuid]) ?>
         </td>
       </tr>
       <?php endforeach; ?>
